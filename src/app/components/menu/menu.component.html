@@ -1,8 +1,15 @@
-<ion-list>
-  <ion-menu-toggle *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]">
-    <ion-item>
-      <ion-icon slot="start" name="add-outline"></ion-icon>
-      <ion-label>Awesome Label</ion-label>
+<ion-list-header>
+  <div class="div-padre">
+    <ion-avatar class="avatar">
+      <img src="https://assets.stickpng.com/images/585e4beacb11b227491c3399.png" />
+    </ion-avatar>
+  </div>
+</ion-list-header>
+  <!-- <ion-note>hi@ionicframework.com</ion-note> -->
+
+  <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+    <ion-item routerDirection="root"  lines="none" detail="false" routerLinkActive="selected">
+      <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+      <ion-label>{{ p.title }}</ion-label>
     </ion-item>
   </ion-menu-toggle>
-</ion-list>
