@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  marvelPublicKey: 'f69d337273c1ae6ac77565df375f2145',
+  marvelPrivateKey: 'b1bf80629f5ddb9d050af5f9723aee0718ccbb42',
+  marvelHash: 'd9c5f72debfd555a4f8ccdb8fc2ca40c',
+  marvelTimeStamp: 1
 };
 
 /*
