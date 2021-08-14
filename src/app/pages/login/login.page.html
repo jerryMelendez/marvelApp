@@ -1,9 +1,39 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+
+  <ion-grid style="padding-top: 60px;">
+    <ion-row>
+      <ion-col size="6" offset="3">
+        <ion-avatar class="user-img">
+          <img src="../../../assets/images/user.png" alt="user">
+        </ion-avatar>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="10" offset="1">
+        <ion-input type="text" placeholder="user name"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="10" offset="1">
+        <ion-input type="password" placeholder="password"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="10" offset="1">
+        <ion-button expand="block" color="danger">
+          <ion-icon slot="start" color="white" name="logo-google"></ion-icon>
+          Sign in with google
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="10" offset="1">
+        <ion-button expand="block" color="secondary">
+          <ion-icon slot="start" color="white" name="logo-facebook"></ion-icon>
+          Sign in with facebook
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

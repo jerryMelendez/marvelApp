@@ -3,17 +3,18 @@ import { MenuComponent } from "./menu/menu.component";
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from './header/header.component';
-import { BrowserModule } from "@angular/platform-browser";
-import { AppRoutingModule } from "../app-routing.module";
+import { CategoryComponent } from "./category/category.component"
 
 @NgModule({
     declarations: [
         MenuComponent,
-        HeaderComponent
+        HeaderComponent,
+        CategoryComponent
     ],
     exports: [
         MenuComponent,
-        HeaderComponent
+        HeaderComponent,
+        CategoryComponent
     ],
     imports: [
         CommonModule,
