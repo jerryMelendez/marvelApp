@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-menu',
@@ -15,8 +16,15 @@ export class MenuComponent implements OnInit {
     { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
     { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
   ];
-  constructor() { }
+  constructor(
+    private navCtrl: NavController
+  ) { }
 
   ngOnInit() {}
+
+  editMyData()
+  {
+    this.navCtrl.navigateForward('/my-data');
+  }
 
 }

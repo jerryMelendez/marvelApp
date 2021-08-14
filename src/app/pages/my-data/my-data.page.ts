@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyDataPage implements OnInit {
 
+  public width = (window.innerWidth) * 0.5;
   constructor() { }
 
   ngOnInit() {
+    console.log(this.width);
   }
 
 }
