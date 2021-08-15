@@ -15,7 +15,6 @@ export class MyDataPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.addUser();
     setTimeout(() => {
       this.getIdentity();
     }, 1000);
@@ -25,10 +24,5 @@ export class MyDataPage implements OnInit {
   {
     this.identity = await this.userService.getIdentity();
     console.log(this.identity);
-  }
-
-  addUser()
-  {
-    this.userService.addUser();
   }
 }

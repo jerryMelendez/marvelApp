@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,7 +15,9 @@ export class LoginPage implements OnInit {
   public password = '';
   
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private alertService: AlertService,
+    private navCtrl: NavController
   ) { }
 
   ngOnInit() {
@@ -31,10 +35,22 @@ export class LoginPage implements OnInit {
     this.userService.loginGoogleUser()
     .then((user: any) => {
       // this.alertService.showLoading('Comprobando datos....');
-      // this.consultarCredenciales(user);
-      console.log(user);
+
+      // Guarda los datos del usuario en el local storage
+      this.userService.setIdentity(user);
+      this.navCtrl.navigateForward('/home');
     }).catch((err) => {
 
     });
+  }
+
+  loginFacebook()
+  {
+    this.userService.loginFacebookUser()
+    .then((user: any) => {
+      console.log(user);
+    }).catch((err) => {
+
+    })
   }
 }
