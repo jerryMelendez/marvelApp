@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,9 @@ export class LoginPage implements OnInit {
   public userName = '';
   public password = '';
   
-  constructor() { }
+  constructor(
+    private userService: UserService
+  ) { }
 
   ngOnInit() {
   }
@@ -23,4 +26,15 @@ export class LoginPage implements OnInit {
     this.type = this.type === 'password' ? 'text' : 'password';
   }
 
+  loginGoogle()
+  {
+    this.userService.loginGoogleUser()
+    .then((user: any) => {
+      // this.alertService.showLoading('Comprobando datos....');
+      // this.consultarCredenciales(user);
+      console.log(user);
+    }).catch((err) => {
+
+    });
+  }
 }
