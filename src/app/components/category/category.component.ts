@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-category',
@@ -8,8 +9,15 @@ import { Component, Input, OnInit } from '@angular/core';
 export class CategoryComponent implements OnInit {
 
   @Input() category = '';
-  constructor() { }
+  constructor(
+    private navCtrl: NavController
+  ) { }
 
   ngOnInit() {}
+
+  goToCategory()
+  {
+    this.navCtrl.navigateForward('/' + this.category);
+  }
 
 }

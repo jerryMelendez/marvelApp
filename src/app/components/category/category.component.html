@@ -1,4 +1,4 @@
-<ion-card class="size-img">
+<ion-card class="size-img" (click)="goToCategory()">
   <ion-card-content class="ion-no-margin ion-no-padding size-img">
     <!-- Cada imagen se mostrará de acuerdo a la categoría que se reciba -->
     <img *ngIf="category==='characters'" src="../../../assets/images/marvelCharacters.jpg" alt="Characters" class="size-img">
