@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-my-data',
@@ -8,10 +9,26 @@ import { Component, OnInit } from '@angular/core';
 export class MyDataPage implements OnInit {
 
   public width = (window.innerWidth) * 0.5;
-  constructor() { }
+  private identity;
+  constructor(
+    private userService: UserService
+  ) { }
 
   ngOnInit() {
-    console.log(this.width);
+    this.addUser();
+    setTimeout(() => {
+      this.getIdentity();
+    }, 1000);
   }
 
+  async getIdentity()
+  {
+    this.identity = await this.userService.getIdentity();
+    console.log(this.identity);
+  }
+
+  addUser()
+  {
+    this.userService.addUser();
+  }
 }
