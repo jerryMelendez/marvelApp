@@ -8,12 +8,34 @@ import { Observable } from 'rxjs';
 })
 export class CharacterService {
 
+  private apikey = `${environment.marvelPublicKey}&ts=${environment.marvelTimeStamp}&hash=${environment.marvelHash}`;
   constructor(
     private http: HttpClient
   ) { }
-
-  getCharacters(): Observable<any>
+  // Obtiene todos los personajes
+  getCharacters(limit = null, offset = null): Observable<any>
   {
-    return this.http.get(`https://gateway.marvel.com:443/v1/public/characters?apikey=${environment.marvelPublicKey}&ts=${environment.marvelTimeStamp}&hash=${environment.marvelHash}`);
+    if (limit === null && offset === null)
+    {
+      return this.http.get(`https://gateway.marvel.com:443/v1/public/characters?apikey=${this.apikey}`);
+    }
+    else
+    {
+      return this.http.get(`https://gateway.marvel.com:443/v1/public/characters?apikey=${this.apikey}&limit=${limit}&offset=${offset}`);
+    }
   }
+
+  // Muestra la informacion de un solo personaje
+  show(id): Observable<any>
+  {
+    return this.http.get(`https://gateway.marvel.com:443/v1/public/characters/${id}?apikey=${this.apikey}`);
+  }
+
+  // Obtiene los comics en los que aparece un personaje
+  getComics(id): Observable<any>
+  {
+    return this.http.get(`https://gateway.marvel.com:443/v1/public/characters/${id}/comics?apikey=${this.apikey}`);
+  }
+
+
 }

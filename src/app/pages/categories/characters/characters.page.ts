@@ -13,7 +13,8 @@ export class CharactersPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getCharacters();
+    this.showCharacter(1011334);
+    this.getComics(1011334);
   }
 
   getCharacters()
@@ -24,6 +25,24 @@ export class CharactersPage implements OnInit {
       },
       error => {
         console.log(error);
+      }
+    )
+  }
+
+  showCharacter(id)
+  {
+    this.charactersService.show(id).subscribe(
+      response => {
+        console.log(response);
+      }
+    )
+  }
+
+  getComics(id)
+  {
+    this.charactersService.getComics(id).subscribe(
+      response => {
+        console.log(response);
       }
     )
   }
