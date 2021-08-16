@@ -1,0 +1,34 @@
+<app-header [title]="'My data'"></app-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" offset="3">
+        <ion-avatar [style]="'width: '+width+'px; height: '+width+'px;'">
+          <img [src]="photoUrl" alt="user">
+          <ion-buttons>
+            <ion-button (change)="subirFoto( $event )" style="position: absolute; bottom: 0px; right: 0px;" shape="round" fill="solid" color="primary">
+              <ion-icon name="camera-outline" slot="icon-only"></ion-icon>
+              <input type="file" id="btn_file" accept="image/*" name="foto">
+            </ion-button>
+          </ion-buttons>
+        </ion-avatar>
+      </ion-col>
+    </ion-row>
+    <ion-row style="padding-top: 15%;">
+      <ion-col offset="1" size="10">
+        <ion-item>
+          <ion-input type="text" [(ngModel)]="identity.displayName" disabled="true"></ion-input>
+          <ion-icon slot="end" name="create-outline" color="dark"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row style="padding-top: 35%;">
+      <ion-col size="8" offset="2">
+        <ion-button expand="block" color="success" (click)="getLocation()">
+          see my location
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

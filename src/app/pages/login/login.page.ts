@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { AlertService } from 'src/app/services/alert.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +10,47 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPage implements OnInit {
 
-  constructor() { }
+  public type = 'password'; // El type del input de contraseña
+  public userName = '';
+  public password = '';
+  
+  constructor(
+    private userService: UserService,
+    private alertService: AlertService,
+    private navCtrl: NavController
+  ) { }
 
   ngOnInit() {
   }
 
+  // Evento al pulsar el ojo para ver la contraseña
+  changeInputType()
+  {
+    console.log('chagetype');
+    this.type = this.type === 'password' ? 'text' : 'password';
+  }
+
+  loginGoogle()
+  {
+    this.userService.loginGoogleUser()
+    .then((user: any) => {
+      // this.alertService.showLoading('Comprobando datos....');
+
+      // Guarda los datos del usuario en el local storage
+      this.userService.setIdentity(user);
+      this.navCtrl.navigateForward('/home');
+    }).catch((err) => {
+
+    });
+  }
+
+  loginFacebook()
+  {
+    this.userService.loginFacebookUser()
+    .then((user: any) => {
+      console.log(user);
+    }).catch((err) => {
+
+    })
+  }
 }
