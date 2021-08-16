@@ -19,6 +19,7 @@ export class MenuComponent implements OnInit {
   //   { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
   // ];
   public identity: any = {};
+  public photoUrl: string = ''; // Esta variable será la url del perfil ya sea la de la cuenta de google o local
 
   constructor(
     private navCtrl: NavController,
@@ -39,6 +40,8 @@ export class MenuComponent implements OnInit {
   async getIdentity()
   {
     this.identity = await this.userService.getIdentity();
+    // Si la variable foto del identity está vacío se mostrará la foto de su gmail, si no se mostrará la que haya subido
+    this.photoUrl = this.identity.foto !== '' ? this.identity.foto : this.identity.fotourl;
   }
 
 }

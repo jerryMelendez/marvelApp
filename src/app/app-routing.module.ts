@@ -15,49 +15,31 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
-    canLoad: [LoginGuard]
-  },
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)  },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
-    canLoad: [AuthGuard]
-  },
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)  },
   {
     path: 'my-data',
-    loadChildren: () => import('./pages/my-data/my-data.module').then( m => m.MyDataPageModule),
-    canLoad: [AuthGuard]
-  },
+    loadChildren: () => import('./pages/my-data/my-data.module').then( m => m.MyDataPageModule)  },
   {
     path: 'characters',
-    loadChildren: () => import('./pages/categories/characters/characters.module').then( m => m.CharactersPageModule),
-    canLoad: [AuthGuard]
-  },
+    loadChildren: () => import('./pages/categories/characters/characters.module').then( m => m.CharactersPageModule)  },
   {
     path: 'comics',
-    loadChildren: () => import('./pages/categories/comics/comics.module').then( m => m.ComicsPageModule),
-    canLoad: [AuthGuard]
-  },
+    loadChildren: () => import('./pages/categories/comics/comics.module').then( m => m.ComicsPageModule)  },
   {
     path: 'creators',
-    loadChildren: () => import('./pages/categories/creators/creators.module').then( m => m.CreatorsPageModule),
-    canLoad: [AuthGuard]
-  },
+    loadChildren: () => import('./pages/categories/creators/creators.module').then( m => m.CreatorsPageModule)  },
   {
     path: 'events',
-    loadChildren: () => import('./pages/categories/events/events.module').then( m => m.EventsPageModule),
-    canLoad: [AuthGuard]
-  },
+    loadChildren: () => import('./pages/categories/events/events.module').then( m => m.EventsPageModule)  },
   {
     path: 'series',
-    loadChildren: () => import('./pages/categories/series/series.module').then( m => m.SeriesPageModule),
-    canLoad: [AuthGuard]
-  },
+    loadChildren: () => import('./pages/categories/series/series.module').then( m => m.SeriesPageModule)  },
   {
     path: 'stories',
-    loadChildren: () => import('./pages/categories/stories/stories.module').then( m => m.StoriesPageModule),
-    canLoad: [AuthGuard]
-  }
+    loadChildren: () => import('./pages/categories/stories/stories.module').then( m => m.StoriesPageModule)  }
 
 ];
 

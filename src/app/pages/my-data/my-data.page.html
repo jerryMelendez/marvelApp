@@ -5,10 +5,11 @@
     <ion-row>
       <ion-col size="6" offset="3">
         <ion-avatar [style]="'width: '+width+'px; height: '+width+'px;'">
-          <img src="../../../assets/images/user.png" alt="user">
+          <img [src]="photoUrl" alt="user">
           <ion-buttons>
             <ion-button style="position: absolute; bottom: 0px; right: 0px;" shape="round" fill="solid" color="primary">
               <ion-icon name="camera-outline" slot="icon-only"></ion-icon>
+              <input type="file" id="btn_file" accept="image/*" name="foto">
             </ion-button>
           </ion-buttons>
         </ion-avatar>
@@ -17,7 +18,7 @@
     <ion-row style="padding-top: 15%;">
       <ion-col offset="1" size="10">
         <ion-item>
-          <ion-input type="text" value="Name Lastname" disabled="true"></ion-input>
+          <ion-input type="text" [(ngModel)]="identity.displayName" disabled="true"></ion-input>
           <ion-icon slot="end" name="create-outline" color="dark"></ion-icon>
         </ion-item>
       </ion-col>

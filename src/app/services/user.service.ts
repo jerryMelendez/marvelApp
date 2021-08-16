@@ -76,17 +76,16 @@ export class UserService {
     console.log(user);
     const nombres = user.displayName.split(' ');
     const usuario: any = {};
-    usuario.nombre = nombres[0];
-    usuario.apellidos = '';
+    usuario.displayName = user.displayName;
     usuario.email = user.email;
     usuario.fotourl = user.providerData[0].photoURL;
     usuario.foto = '';
     usuario.nick = nombres[0] + '' + nombres[1].substring(0, 1) + Math.round(Math.random() * 1001);
     usuario.uid = user.uid;
   
-    for (let i = 1; i < nombres.length; i++) {
-      usuario.apellidos = ' ' + usuario.apellidos + nombres[i];
-    }
+    // for (let i = 1; i < nombres.length; i++) {
+    //   usuario.apellidos = ' ' + usuario.apellidos + nombres[i];
+    // }
   
     if (user.providerData[0].providerId === 'google.com')
     {
@@ -138,5 +137,13 @@ export class UserService {
         return Promise.resolve(false);
       }
     }
+  }
+
+  uploadPhotos()
+  {
+    // const headers = new HttpHeaders().set('Authorization', token);
+    // const formData = new FormData();
+    // formData.append('file0', foto, foto.name);
+    // return this.http.post(`${url}user/upload`, formData, {headers});
   }
 }
