@@ -14,6 +14,8 @@ export class CharactersPage implements OnInit {
   public identity: any = {};
   public pageTitle: string = 'Characters';
   public bandFavoritePage: boolean = false; // Bandera que indicará si se están viendo los personajes favoritos o todos los demás
+  public txtSearch: string = '';
+
   constructor(
     private charactersService: CharacterService,
     private alertService: AlertService,
@@ -74,8 +76,15 @@ export class CharactersPage implements OnInit {
   // Recibe del componente panel-search el texto de busqueta y hace la consulta al api
   onTypeEmitted(event)
   {
-    this.alertService.showLoading();
-    this.getCharacters(event !== '' ? event : null);
+    if (this.bandFavoritePage)
+    {
+      this.txtSearch = event;
+    }
+    else
+    {
+      this.alertService.showLoading();
+      this.getCharacters(event !== '' ? event : null);
+    }
   }
 
   onTypeEmittedCharacterPanel(event)

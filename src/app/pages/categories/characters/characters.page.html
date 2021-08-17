@@ -3,7 +3,7 @@
     <app-panel-search (typeChanged)="onTypeEmitted($event)" [categoryName]="'characters'"></app-panel-search>
     <ion-grid>
         <ion-row>
-            <ion-col size="6" *ngFor="let item of arrayCharacters">
+            <ion-col size="6" *ngFor="let item of arrayCharacters | filtro: txtSearch: 'name'">
                 <app-panel-character [character]="item"
                                     [identity]="identity"  
                                     (typeChanged)="onTypeEmittedCharacterPanel($event)"
