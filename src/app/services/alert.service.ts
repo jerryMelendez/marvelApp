@@ -23,7 +23,7 @@ export class AlertService {
 
     await alert.present();
   }
-  stopLoading(band: boolean)
+  stopLoading()
   {
     if (this.loading)
     {

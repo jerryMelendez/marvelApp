@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from 'src/app/services/alert.service';
 import { CharacterService } from 'src/app/services/character.service';
 
 @Component({
@@ -10,7 +11,8 @@ export class CharactersPage implements OnInit {
 
   public arrayCharacters: any[] = [];
   constructor(
-    private charactersService: CharacterService
+    private charactersService: CharacterService,
+    private alertService: AlertService
   ) {}
 
   ngOnInit() {
@@ -19,13 +21,14 @@ export class CharactersPage implements OnInit {
     this.getCharacters();
   }
 
-  getCharacters()
+  getCharacters(name: string = null)
   {
-    this.charactersService.getCharacters(0, 100).subscribe(
+    this.charactersService.getCharacters(0, 100, name).subscribe(
       response => {
         console.log(response);
         if (response.code === 200)
         {
+          this.alertService.stopLoading();
           this.arrayCharacters = response.data.results;
         }
       },
@@ -53,4 +56,9 @@ export class CharactersPage implements OnInit {
     )
   }
 
+  onTypeEmitted(event)
+  {
+    this.alertService.showLoading();
+    this.getCharacters(event);
+  }
 }

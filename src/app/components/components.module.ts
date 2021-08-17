@@ -5,19 +5,22 @@ import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from './header/header.component';
 import { CategoryComponent } from "./category/category.component"
 import { PanelCharacterComponent } from "./panel-character/panel-character.component";
+import { PanelSearchComponent } from "./panel-search/panel-search.component";
 
 @NgModule({
     declarations: [
         MenuComponent,
         HeaderComponent,
         CategoryComponent,
-        PanelCharacterComponent
+        PanelCharacterComponent,
+        PanelSearchComponent
     ],
     exports: [
         MenuComponent,
         HeaderComponent,
         CategoryComponent,
-        PanelCharacterComponent
+        PanelCharacterComponent,
+        PanelSearchComponent
     ],
     imports: [
         CommonModule,
