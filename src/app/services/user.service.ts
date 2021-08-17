@@ -22,15 +22,22 @@ export class UserService {
   {
     const myuid = await Storage.get({key: 'my_uid'});
 
-    const arrayMyUid = myuid.value.split(`\"`)
-
-    const users = await Storage.get({ key: 'users' });
-
-    const arrayUsers: any[] = JSON.parse(users.value);
-
-    const identity = arrayUsers.find(e => e.uid === arrayMyUid[1]);
-
-    return identity;
+    if (myuid.value !== null)
+    {
+      const arrayMyUid = myuid.value.split(`\"`)
+  
+      const users = await Storage.get({ key: 'users' });
+  
+      const arrayUsers: any[] = JSON.parse(users.value);
+  
+      const identity = arrayUsers.find(e => e.uid === arrayMyUid[1]);
+  
+      return identity;
+    }
+    else
+    {
+      return {};
+    }
   }
 
   setIdentity(user)
@@ -192,5 +199,10 @@ export class UserService {
     };
     reader.readAsDataURL(blob);
   });
+
+  async logOut(): Promise<any>
+  {
+    await Storage.remove({key: 'my_uid'});
+  }
   
 }

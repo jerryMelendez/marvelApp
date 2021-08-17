@@ -44,4 +44,15 @@ export class MenuComponent implements OnInit {
     this.photoUrl = this.identity.foto !== '' ? this.identity.foto : this.identity.fotourl;
   }
 
+  async logOut()
+  {
+    const data = await this.userService.logOut();
+
+    if (data || !data)
+    {
+      this.navCtrl.navigateForward('/login');
+      this.menu.close();
+    }
+  }
+
 }
