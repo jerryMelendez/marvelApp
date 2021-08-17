@@ -1,4 +1,4 @@
-<app-header [title]="pageTitle"></app-header>
+<app-header [title]="pageTitle" [identity]="identity"></app-header>
 <ion-content>
     <app-panel-search (typeChanged)="onTypeEmitted($event)" [categoryName]="'characters'"></app-panel-search>
     <ion-grid>

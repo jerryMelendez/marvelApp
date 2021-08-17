@@ -33,11 +33,11 @@ export class ComicService {
     {
       if (limit === null && offset === null)
       {
-        return this.http.get(`https://gateway.marvel.com:443/v1/public/comics?apikey=${this.apikey}?titleStartsWith=${title}`);
+        return this.http.get(`https://gateway.marvel.com:443/v1/public/comics?apikey=${this.apikey}&titleStartsWith=${title}`);
       }
       else
       {
-        return this.http.get(`https://gateway.marvel.com:443/v1/public/comics?apikey=${this.apikey}&limit=${limit}&offset=${offset}?titleStartsWith=${title}`);
+        return this.http.get(`https://gateway.marvel.com:443/v1/public/comics?apikey=${this.apikey}&limit=${limit}&offset=${offset}&titleStartsWith=${title}`);
       }
     }
   }

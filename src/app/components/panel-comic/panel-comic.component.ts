@@ -39,7 +39,7 @@ export class PanelComicComponent implements OnInit {
        no sobre cargar el storage con toda la información, solamente ponemos lo necesario*/ 
     const char = {
       id: this.comic.id,
-      name: this.comic.title,
+      title: this.comic.title,
       description: this.comic.description,
       photoUrl: this.comic.thumbnail.path + '.' + this.comic.thumbnail.extension
     }

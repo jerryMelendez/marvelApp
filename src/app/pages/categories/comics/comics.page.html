@@ -1,13 +1,12 @@
-<app-header [title]="'Comics'"></app-header>
+<app-header [title]="'Comics'" [identity]="identity" (typeChanged)="onTypeEmittedHeader($event)"></app-header>
 <ion-content>
     <app-panel-search (typeChanged)="onTypeEmitted($event)" [categoryName]="'comics'"></app-panel-search>
     <ion-grid>
         <ion-row>
             <ion-col size="6" *ngFor="let item of arrayComics | filtro: txtSearch: 'title'">
-                <app-panel-character [character]="item"
+                <app-panel-comic [comic]="item"
                                     [identity]="identity"  
-                                    (typeChanged)="onTypeEmittedComicPanel($event)"
-                ></app-panel-character>
+                ></app-panel-comic>
             </ion-col>
         </ion-row>
     </ion-grid>

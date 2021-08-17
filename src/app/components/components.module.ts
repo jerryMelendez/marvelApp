@@ -9,6 +9,9 @@ import { PanelSearchComponent } from "./panel-search/panel-search.component";
 import { ModalDetailCharacterComponent } from './modals/modal-detail-character/modal-detail-character.component';
 import { PanelComicComponent } from './panel-comic/panel-comic.component';
 import { ModalDetailComicComponent } from './modals/modal-detail-comic/modal-detail-comic.component';
+import { ModalFavoriteCharactersComponent } from './modals/modal-favorite-characters/modal-favorite-characters.component';
+import { ModalFavoriteComicsComponent } from './modals/modal-favorite-comics/modal-favorite-comics.component';
+import { PipesModule } from "../pipes/pipes.module";
 
 @NgModule({
     declarations: [
@@ -19,7 +22,9 @@ import { ModalDetailComicComponent } from './modals/modal-detail-comic/modal-det
         PanelSearchComponent,
         ModalDetailCharacterComponent,
         PanelComicComponent,
-        ModalDetailComicComponent
+        ModalDetailComicComponent,
+        ModalFavoriteCharactersComponent,
+        ModalFavoriteComicsComponent
     ],
     exports: [
         MenuComponent,
@@ -29,11 +34,14 @@ import { ModalDetailComicComponent } from './modals/modal-detail-comic/modal-det
         PanelSearchComponent,
         ModalDetailCharacterComponent,
         PanelComicComponent,
-        ModalDetailComicComponent
+        ModalDetailComicComponent,
+        ModalFavoriteCharactersComponent,
+        ModalFavoriteComicsComponent
     ],
     imports: [
         CommonModule,
-        IonicModule.forRoot(), 
+        IonicModule.forRoot(),
+        PipesModule
     ]
 })
 

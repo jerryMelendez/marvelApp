@@ -41,7 +41,7 @@ export class CharactersPage implements OnInit {
     }
   }
 
-  // Metodo que obtiene el valor de un parametro en la ruta, los parametros de estilo url...?variable=valor
+  // Metodo que obtiene el valor de una variable mandada en la ruta, los variables de estilo url...?variable=valor
   getParameterByName(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
     // tslint:disable-next-line: one-variable-per-declaration
@@ -62,7 +62,7 @@ export class CharactersPage implements OnInit {
         }
       },
       error => {
-        console.log(error);
+        this.alertService.mostrarToast('Error getting data');
       }
     )
   }
@@ -76,18 +76,18 @@ export class CharactersPage implements OnInit {
   // Recibe del componente panel-search el texto de busqueta y hace la consulta al api
   onTypeEmitted(event)
   {
-    if (this.bandFavoritePage)
+    if (this.bandFavoritePage) // Si el usuario esta viendo los favoritos la busqueda se hará a traves del pipe name
     {
       this.txtSearch = event;
     }
-    else
+    else // Si el usuario está viendo todos los comics la busqueda se hará consultando el api
     {
       this.alertService.showLoading();
       this.getCharacters(event !== '' ? event : null);
     }
   }
 
-  onTypeEmittedCharacterPanel(event)
+  onTypeEmittedCharacterPanel(event) // Evento que se disparará a traves del output cuando se elimina a un favorito
   {
     if (this.bandFavoritePage)
     {

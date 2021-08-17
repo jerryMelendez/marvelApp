@@ -1,4 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NavController, ModalController } from '@ionic/angular';
+import { ModalFavoriteCharactersComponent } from '../modals/modal-favorite-characters/modal-favorite-characters.component';
+import { ModalFavoriteComicsComponent } from '../modals/modal-favorite-comics/modal-favorite-comics.component';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +11,43 @@ import { Component, Input, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   @Input() title = '';
-  constructor() { }
+  @Input() identity: any = {};
+  @Output() typeChanged = new EventEmitter<string>();
+  constructor(
+    private navCtrl: NavController,
+    private modalCtrl: ModalController
+  ) { }
 
   ngOnInit() {
+  }
+
+  async seeFavorites()
+  {
+    let component;
+    if (this.title === 'Characters')
+    {
+      component = ModalFavoriteCharactersComponent
+    }
+    else if (this.title === 'Comics')
+    {
+      component = ModalFavoriteComicsComponent;
+    }
+
+    const modal = await this.modalCtrl.create({
+      component: component,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        identity: this.identity
+      }
+    });
+    await modal.present();
+
+    const {data} = await modal.onDidDismiss();
+
+    if (data || !data)
+    {
+      this.typeChanged.emit('close');
+    }
   }
 
 }
