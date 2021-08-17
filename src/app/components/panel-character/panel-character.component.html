@@ -1,4 +1,12 @@
 <ion-card class="ion-no-margin ion-no-padding" style="min-height: 250px">
+  <ion-buttons style="position: absolute; top: 0px; right: 0px; z-index:2;">
+    <ion-button *ngIf="!flagFavorite" shape="round" (click)="addFavorite()">
+      <ion-icon color="danger" slot="icon-only" name="heart-outline"></ion-icon>
+    </ion-button>
+    <ion-button *ngIf="flagFavorite" shape="round">
+      <ion-icon color="danger" slot="icon-only" name="heart"></ion-icon>
+    </ion-button>
+  </ion-buttons>
   <ion-card-content class="ion-no-margin ion-no-padding">
     <ion-grid class="ion-no-margin ion-no-padding">
       <ion-row class="ion-no-margin ion-no-padding">

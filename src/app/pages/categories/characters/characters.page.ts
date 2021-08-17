@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
 import { CharacterService } from 'src/app/services/character.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-characters',
@@ -10,14 +11,17 @@ import { CharacterService } from 'src/app/services/character.service';
 export class CharactersPage implements OnInit {
 
   public arrayCharacters: any[] = [];
+  public identity: any = {};
   constructor(
     private charactersService: CharacterService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private userService: UserService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     // this.showCharacter(1011334);
     // this.getComics(1011334);
+    this.identity = await this.userService.getIdentity();
     this.getCharacters();
   }
 
@@ -59,6 +63,6 @@ export class CharactersPage implements OnInit {
   onTypeEmitted(event)
   {
     this.alertService.showLoading();
-    this.getCharacters(event);
+    this.getCharacters(event !== '' ? event : null);
   }
 }
