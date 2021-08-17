@@ -36,6 +36,5 @@ export class ModalFavoriteCharactersComponent implements OnInit {
   async getFavoriteCharacters()
   {
     this.arrayCharacters = await this.characterService.getFavoriteCharacters(this.identity.uid);
-    console.log(this.arrayCharacters);
   }
 }
