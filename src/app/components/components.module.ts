@@ -7,6 +7,8 @@ import { CategoryComponent } from "./category/category.component"
 import { PanelCharacterComponent } from "./panel-character/panel-character.component";
 import { PanelSearchComponent } from "./panel-search/panel-search.component";
 import { ModalDetailCharacterComponent } from './modals/modal-detail-character/modal-detail-character.component';
+import { PanelComicComponent } from './panel-comic/panel-comic.component';
+import { ModalDetailComicComponent } from './modals/modal-detail-comic/modal-detail-comic.component';
 
 @NgModule({
     declarations: [
@@ -15,7 +17,9 @@ import { ModalDetailCharacterComponent } from './modals/modal-detail-character/m
         CategoryComponent,
         PanelCharacterComponent,
         PanelSearchComponent,
-        ModalDetailCharacterComponent
+        ModalDetailCharacterComponent,
+        PanelComicComponent,
+        ModalDetailComicComponent
     ],
     exports: [
         MenuComponent,
@@ -23,7 +27,9 @@ import { ModalDetailCharacterComponent } from './modals/modal-detail-character/m
         CategoryComponent,
         PanelCharacterComponent,
         PanelSearchComponent,
-        ModalDetailCharacterComponent
+        ModalDetailCharacterComponent,
+        PanelComicComponent,
+        ModalDetailComicComponent
     ],
     imports: [
         CommonModule,
