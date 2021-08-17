@@ -8,7 +8,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class PanelSearchComponent implements OnInit {
 
   @Output() typeChanged = new EventEmitter<string>();
-  type='got';
   @Input() categoryName: string = '';
   constructor() { }
 

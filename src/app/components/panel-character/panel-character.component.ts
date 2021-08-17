@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Character } from 'src/app/interfaces/interfaces';
 import { AlertService } from 'src/app/services/alert.service';
 import { CharacterService } from '../../services/character.service';
+import { ModalController } from '@ionic/angular';
+import { ModalDetailCharacterComponent } from '../modals/modal-detail-character/modal-detail-character.component';
 
 @Component({
   selector: 'app-panel-character',
@@ -10,12 +12,14 @@ import { CharacterService } from '../../services/character.service';
 })
 export class PanelCharacterComponent implements OnInit {
 
+  @Output() typeChanged = new EventEmitter<string>();
   @Input() character: Character;
   @Input() identity: any;
   public flagFavorite: boolean = false; // Bandera que se usa para mostrar si el personajes es favorito en el front
   constructor(
     private characterService: CharacterService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private modalCtrl: ModalController
   ) { }
 
   ngOnInit() {
@@ -58,6 +62,18 @@ export class PanelCharacterComponent implements OnInit {
     }
 
     this.checkFavorite();
+    this.typeChanged.emit('Removed');
+  }
+
+  async seeDetail() {
+    const modal = await this.modalCtrl.create({
+      component: ModalDetailCharacterComponent,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        character: this.character
+      }
+    });
+    return await modal.present();
   }
 
 }

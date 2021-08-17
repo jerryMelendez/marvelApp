@@ -11,7 +11,7 @@
     <ion-grid class="ion-no-margin ion-no-padding">
       <ion-row class="ion-no-margin ion-no-padding">
         <ion-col size="12">
-          <img [src]="character.thumbnail.path + '.' + character.thumbnail.extension" [alt]="character.name" style="min-height: 220px; max-height: 220px;">
+          <img [src]="character.thumbnail ? (character.thumbnail.path + '.' + character.thumbnail.extension) : character.photoUrl" [alt]="character.name" style="min-height: 220px; max-height: 220px;">
         </ion-col>
       </ion-row>
       <ion-row>
@@ -20,7 +20,7 @@
             {{character.name}}
           </p>
           <ion-buttons class="button">
-            <ion-button shape="round">
+            <ion-button shape="round" (click)="seeDetail()">
               <ion-icon size="small" slot="icon-only" name="eye" color="white"></ion-icon>
             </ion-button>
           </ion-buttons>

@@ -10,4 +10,6 @@ export interface Character{
     thumbnail?: any;
     urls?: any[];
     events?: object;
+    comics?: any;
+    photoUrl?: string;
 }

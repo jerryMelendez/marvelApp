@@ -128,7 +128,6 @@ export class CharacterService {
       if (data)
       {
         const index = data.findIndex(e => e.id === id); // Buscará el indice del personaje a remover
-        console.log(index);
 
         if (index >= 0) 
         {
@@ -141,5 +140,12 @@ export class CharacterService {
       }
     });
     return band;
+  }
+
+  async getFavoriteCharacters(uid): Promise<any>
+  {
+    const key = 'favoriteCharacters_' + uid;
+    const resp = await Storage.get({key});
+    return JSON.parse(resp.value);
   }
 }

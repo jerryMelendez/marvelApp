@@ -6,6 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { CategoryComponent } from "./category/category.component"
 import { PanelCharacterComponent } from "./panel-character/panel-character.component";
 import { PanelSearchComponent } from "./panel-search/panel-search.component";
+import { ModalDetailCharacterComponent } from './modals/modal-detail-character/modal-detail-character.component';
 
 @NgModule({
     declarations: [
@@ -13,14 +14,16 @@ import { PanelSearchComponent } from "./panel-search/panel-search.component";
         HeaderComponent,
         CategoryComponent,
         PanelCharacterComponent,
-        PanelSearchComponent
+        PanelSearchComponent,
+        ModalDetailCharacterComponent
     ],
     exports: [
         MenuComponent,
         HeaderComponent,
         CategoryComponent,
         PanelCharacterComponent,
-        PanelSearchComponent
+        PanelSearchComponent,
+        ModalDetailCharacterComponent
     ],
     imports: [
         CommonModule,

@@ -11,7 +11,7 @@ export class AlertService {
   constructor(
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
-    private toastController: ToastController,
+    private toastController: ToastController
   ) { }
 
   async alertaInformativa( message: string ) {
@@ -52,7 +52,7 @@ export class AlertService {
   async mostrarToast(mensaje) {
     const toast = await this.toastController.create({
       message: mensaje,
-      position: 'top',
+      position: 'bottom',
       color: 'white',
       duration: 3000
     });
