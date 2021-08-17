@@ -4,17 +4,20 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from './header/header.component';
 import { CategoryComponent } from "./category/category.component"
+import { PanelCharacterComponent } from "./panel-character/panel-character.component";
 
 @NgModule({
     declarations: [
         MenuComponent,
         HeaderComponent,
-        CategoryComponent
+        CategoryComponent,
+        PanelCharacterComponent
     ],
     exports: [
         MenuComponent,
         HeaderComponent,
-        CategoryComponent
+        CategoryComponent,
+        PanelCharacterComponent
     ],
     imports: [
         CommonModule,

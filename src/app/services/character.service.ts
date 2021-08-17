@@ -13,15 +13,29 @@ export class CharacterService {
     private http: HttpClient
   ) { }
   // Obtiene todos los personajes
-  getCharacters(limit = null, offset = null): Observable<any>
+  getCharacters(offset = null, limit = null, name = null): Observable<any>
   {
-    if (limit === null && offset === null)
+    if (name === null)
     {
-      return this.http.get(`https://gateway.marvel.com:443/v1/public/characters?apikey=${this.apikey}`);
+      if (limit === null && offset === null)
+      {
+        return this.http.get(`https://gateway.marvel.com:443/v1/public/characters?apikey=${this.apikey}`);
+      }
+      else
+      {
+        return this.http.get(`https://gateway.marvel.com:443/v1/public/characters?apikey=${this.apikey}&limit=${limit}&offset=${offset}`);
+      }
     }
-    else
+    else // Si la variable name tiene un valor retornará los personajes cuyos nombres comiencen con este string
     {
-      return this.http.get(`https://gateway.marvel.com:443/v1/public/characters?apikey=${this.apikey}&limit=${limit}&offset=${offset}`);
+      if (limit === null && offset === null)
+      {
+        return this.http.get(`https://gateway.marvel.com:443/v1/public/characters?apikey=${this.apikey}&nameStartsWith=${name}`);
+      }
+      else
+      {
+        return this.http.get(`https://gateway.marvel.com:443/v1/public/characters?apikey=${this.apikey}&limit=${limit}&offset=${offset}&nameStartsWith=${name}`);
+      }
     }
   }
 
