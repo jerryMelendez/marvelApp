@@ -52,40 +52,6 @@ export class CharacterService {
     return this.http.get(`https://gateway.marvel.com:443/v1/public/characters/${id}/comics?apikey=${this.apikey}`);
   }
 
-  // Agrega un personaje a un array de favoritos en el local storage
-  async addFavorite(character, uid): Promise<any>
-  {
-    // Creamos un array en el local storage de todos los personajes favoritos que el usuario ha agregado
-    const key = 'favoriteCharacters_' + uid; // El uid es el id del usuario que está agregando
-
-    // Consultar si existe ese array en el storage
-    const resp = await Storage.get({ key }).then((items) => {
-      let data: any[] = JSON.parse(items.value); // Obtener la respuesta del JSON y guardarla en una variable de tipo objeto
-      // Verificar si existe un objeto guardado
-      if ( data )
-      {
-        //Agregamos el personaje al array
-        data.push(character);
-
-        // filtramos el array para que no hallan personajes repetidos
-        const hash = {};
-        data = data.filter(current => {
-          const exists = !hash[current.id];
-          hash[current.id] = true;
-          return exists;
-        });
-        
-        // Cargamos el array devuelta al local storage
-        Storage.set({ key, value: JSON.stringify(data) });
-      }
-      else // Si no hay algun registro guardado Asignar el primero
-      {
-        Storage.set({ key, value: JSON.stringify([character]) });
-      }
-    });
-    return resp;
-  }
-
   // Revisar si un personaje está en los favoritos: true -> está, false -> no está
   async checkFavorite(id, uid): Promise<any>
   {
@@ -112,6 +78,66 @@ export class CharacterService {
       else // Si no existe automaticamente devolvemos false
       {
         band = false;
+      }
+    });
+    return band;
+  }
+
+    // Agrega un personaje a un array de favoritos en el local storage
+    async addFavorite(character, uid): Promise<any>
+    {
+      // Creamos un array en el local storage de todos los personajes favoritos que el usuario ha agregado
+      const key = 'favoriteCharacters_' + uid; // El uid es el id del usuario que está agregando
+  
+      // Consultar si existe ese array en el storage
+      const resp = await Storage.get({ key }).then((items) => {
+        let data: any[] = JSON.parse(items.value); // Obtener la respuesta del JSON y guardarla en una variable de tipo objeto
+        // Verificar si existe un objeto guardado
+        if ( data )
+        {
+          //Agregamos el personaje al array
+          data.push(character);
+  
+          // filtramos el array para que no hallan personajes repetidos
+          const hash = {};
+          data = data.filter(current => {
+            const exists = !hash[current.id];
+            hash[current.id] = true;
+            return exists;
+          });
+          
+          // Cargamos el array devuelta al local storage
+          Storage.set({ key, value: JSON.stringify(data) });
+        }
+        else // Si no hay algun registro guardado Asignar el primero
+        {
+          Storage.set({ key, value: JSON.stringify([character]) });
+        }
+      });
+      return resp;
+    }
+
+    async RemoveFavorite(id, uid): Promise<any>
+    {
+      let band = false; // Bandera que nos dirá si la operación fué exitosa: true -> exito, false -> fracaso
+      const key = 'favoriteCharacters_' + uid;
+
+    await Storage.get({key}).then((items) => {
+      let data: any[] = JSON.parse(items.value);
+
+      if (data)
+      {
+        const index = data.findIndex(e => e.id === id); // Buscará el indice del personaje a remover
+        console.log(index);
+
+        if (index >= 0) 
+        {
+          data.splice(index, 1); // Eliminará el personaje del array
+
+          Storage.set({ key, value: JSON.stringify(data) }); // Cargamos el array devuelta al local storage
+
+          band = true;
+        }
       }
     });
     return band;

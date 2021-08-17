@@ -22,6 +22,12 @@ export class PanelCharacterComponent implements OnInit {
     this.checkFavorite();
   }
 
+  // Comprobar si el personajes está añadido a favoritos
+  async checkFavorite()
+  {
+    this.flagFavorite = await this.characterService.checkFavorite(this.character.id, this.identity.uid);
+  }
+
   // Metodo para agregar un personaje a la lista de favoritos del usuario
   async addFavorite()
   {
@@ -42,10 +48,16 @@ export class PanelCharacterComponent implements OnInit {
     }
   }
 
-  // Comprobar si el personajes está añadido a favoritos
-  async checkFavorite()
+  async removeFavorite()
   {
-    this.flagFavorite = await this.characterService.checkFavorite(this.character.id, this.identity.uid);
+    const band = await this.characterService.RemoveFavorite(this.character.id, this.identity.uid);
+
+    if (band)
+    {
+      this.alertService.mostrarToast('Removed from your favorites');
+    }
+
+    this.checkFavorite();
   }
 
 }

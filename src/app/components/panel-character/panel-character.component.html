@@ -3,7 +3,7 @@
     <ion-button *ngIf="!flagFavorite" shape="round" (click)="addFavorite()">
       <ion-icon color="danger" slot="icon-only" name="heart-outline"></ion-icon>
     </ion-button>
-    <ion-button *ngIf="flagFavorite" shape="round">
+    <ion-button *ngIf="flagFavorite" shape="round" (click)="removeFavorite()">
       <ion-icon color="danger" slot="icon-only" name="heart"></ion-icon>
     </ion-button>
   </ion-buttons>
