@@ -15,8 +15,6 @@ export class PanelSearchComponent implements OnInit {
 
   onSearchChange(event)
   {
-    console.log(event.detail.value);
     this.typeChanged.emit(event.detail.value);
   }
-
 }

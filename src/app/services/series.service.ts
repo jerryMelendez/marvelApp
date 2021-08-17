@@ -15,15 +15,29 @@ export class SeriesService {
   ) { }
 
   // Obtiene las series
-  getSeries(limit = null, offset = null): Observable<any>
+  getSeries(offset = null, limit = null, title = null): Observable<any>
   {
-    if (limit === null && offset === null)
+    if (title === null)
     {
-      return this.http.get(`https://gateway.marvel.com:443/v1/public/series?apikey=${this.apikey}`);
+      if (limit === null && offset === null)
+      {
+        return this.http.get(`https://gateway.marvel.com:443/v1/public/series?apikey=${this.apikey}`);
+      }
+      else
+      {
+        return this.http.get(`https://gateway.marvel.com:443/v1/public/series?apikey=${this.apikey}&limit=${limit}&offset=${offset}`);
+      }
     }
     else
     {
-      return this.http.get(`https://gateway.marvel.com:443/v1/public/series?apikey=${this.apikey}&limit=${limit}&offset=${offset}`);
+      if (limit === null && offset === null)
+      {
+        return this.http.get(`https://gateway.marvel.com:443/v1/public/series?apikey=${this.apikey}&titleStartsWith=${title}`);
+      }
+      else
+      {
+        return this.http.get(`https://gateway.marvel.com:443/v1/public/series?apikey=${this.apikey}&limit=${limit}&offset=${offset}&titleStartsWith=${title}`);
+      }
     }
   }
 

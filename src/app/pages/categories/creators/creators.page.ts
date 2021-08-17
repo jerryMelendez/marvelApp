@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from 'src/app/services/alert.service';
+import { CreatorsService } from '../../../services/creators.service';
 
 @Component({
   selector: 'app-creators',
@@ -7,9 +9,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreatorsPage implements OnInit {
 
-  constructor() { }
+  public arrayCreators: any[] = [];
+  public identity: any = {};
+  constructor(
+    private creatorsService: CreatorsService,
+    private alertService: AlertService
+  ) { }
 
   ngOnInit() {
+    this.getCreators();
+  }
+
+  getCreators(name = null)
+  {
+    this.creatorsService.getCreators(0, 100, name).subscribe(
+      response => {
+        if (response.code === 200)
+        {
+          this.alertService.stopLoading();
+          this.arrayCreators = response.data.results;
+        }
+      }
+    );
+  }
+
+  onTypeEmitted(event)
+  {
+    this.alertService.showLoading();
+    this.getCreators(event === '' ? null : event);
   }
 
 }

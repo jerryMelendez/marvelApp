@@ -15,15 +15,30 @@ export class CreatorsService {
   ) { }
 
   // Obtiene los creadores
-  getCreators(limit = null, offset = null): Observable<any>
+  getCreators(offset = null, limit = null, name = null): Observable<any>
   {
-    if (limit === null && offset === null)
+    if (name === null)
     {
-      return this.http.get(`https://gateway.marvel.com:443/v1/public/creators?apikey=${this.apikey}`);
+      if (limit === null && offset === null)
+      {
+        return this.http.get(`https://gateway.marvel.com:443/v1/public/creators?apikey=${this.apikey}`);
+      }
+      else
+      {
+        return this.http.get(`https://gateway.marvel.com:443/v1/public/creators?apikey=${this.apikey}&limit=${limit}&offset=${offset}`);
+      }
     }
     else
     {
-      return this.http.get(`https://gateway.marvel.com:443/v1/public/creators?apikey=${this.apikey}&limit=${limit}&offset=${offset}`);
+      console.log(name);
+      if (limit === null && offset === null)
+      {
+        return this.http.get(`https://gateway.marvel.com:443/v1/public/creators?nameStartsWith=${name}&apikey=${this.apikey}`);
+      }
+      else
+      {
+        return this.http.get(`https://gateway.marvel.com:443/v1/public/creators?nameStartsWith=${name}&apikey=${this.apikey}&limit=${limit}&offset=${offset}`);
+      }
     }
   }
 

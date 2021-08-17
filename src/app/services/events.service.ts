@@ -15,15 +15,29 @@ export class EventsService {
   ) { }
 
   // Obtiene los eventos
-  getEvents(limit = null, offset = null): Observable<any>
+  getEvents(offset = null, limit = null, name = null): Observable<any>
   {
-    if (limit === null && offset === null)
+    if (name === null)
     {
-      return this.http.get(`https://gateway.marvel.com:443/v1/public/events?apikey=${this.apikey}`);
+      if (limit === null && offset === null)
+      {
+        return this.http.get(`https://gateway.marvel.com:443/v1/public/events?apikey=${this.apikey}`);
+      }
+      else
+      {
+        return this.http.get(`https://gateway.marvel.com:443/v1/public/events?apikey=${this.apikey}&limit=${limit}&offset=${offset}`);
+      }
     }
     else
     {
-      return this.http.get(`https://gateway.marvel.com:443/v1/public/events?apikey=${this.apikey}&limit=${limit}&offset=${offset}`);
+      if (limit === null && offset === null)
+      {
+        return this.http.get(`https://gateway.marvel.com:443/v1/public/events?apikey=${this.apikey}&nameStartsWith=${name}`);
+      }
+      else
+      {
+        return this.http.get(`https://gateway.marvel.com:443/v1/public/events?apikey=${this.apikey}&limit=${limit}&offset=${offset}&nameStartsWith=${name}`);
+      }
     }
   }
 

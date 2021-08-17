@@ -15,7 +15,7 @@ export class StoriesService {
   ) { }
 
   // Obtiene las historias
-  getStories(limit = null, offset = null): Observable<any>
+  getStories(offset = null, limit = null, ): Observable<any>
   {
     if (limit === null && offset === null)
     {
