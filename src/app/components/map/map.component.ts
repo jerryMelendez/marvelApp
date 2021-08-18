@@ -14,7 +14,7 @@ export class MapComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    	console.log(this.coords);
+    // Componente que rendirisa el mapa
     setTimeout(() => {
       mapboxgl.accessToken = 'pk.eyJ1IjoiamVycnltZWxlbmRleiIsImEiOiJja3NnejNrcTAxcGRlMzBuNXd3ZnBobXBsIn0.hSWuGM4TfJrxrXP25wUpHA';
         const map = new mapboxgl.Map({
@@ -26,8 +26,6 @@ export class MapComponent implements OnInit {
   
       const marker = new mapboxgl.Marker().setLngLat( this.coords ).addTo(map);
     }, 1000);
-    // const lat = Number(this.coords[0]);
-    // const lng = Number(this.coords[1]);
   }
 
 }

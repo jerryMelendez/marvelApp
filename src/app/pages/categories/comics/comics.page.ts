@@ -26,6 +26,7 @@ export class ComicsPage implements OnInit {
 
   async ngOnInit() {
     this.identity = await this.userService.getIdentity();
+    this.alertService.showLoading();
     this.getComics();
   }
 

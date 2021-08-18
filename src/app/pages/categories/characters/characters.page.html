@@ -10,7 +10,6 @@
             <ion-col size="6" *ngFor="let item of arrayCharacters">
                 <app-panel-character [character]="item"
                                     [identity]="identity"  
-                                    (typeChanged)="onTypeEmittedCharacterPanel($event)"
                 ></app-panel-character>
             </ion-col>
         </ion-row>

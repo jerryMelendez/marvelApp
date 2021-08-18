@@ -60,4 +60,23 @@ export class LoginPage implements OnInit {
 
     })
   }
+
+  // Entrar como un usuario invitado y crear las credenciales de este
+  loginAsGuest()
+  {
+    const iden = {
+      auth: 'guest',
+      displayName: 'guest user',
+      email: '',
+      fotourl: '../../../assets/images/user.png',
+      foto: '',
+      nick: 'guestU',
+      uid: '17GEtwUqJapXiWbz69YaLffOHEs5'
+    }
+    this.userService.setIdentity(iden);
+    this.navCtrl.navigateForward('/home');
+      setTimeout(() => {
+        location.reload();
+      }, 500);
+  }
 }

@@ -8,6 +8,7 @@ import { SeriesPageRoutingModule } from './series-routing.module';
 
 import { SeriesPage } from './series.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { PipesModule } from '../../../pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
     FormsModule,
     IonicModule,
     SeriesPageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    PipesModule
   ],
   declarations: [SeriesPage]
 })

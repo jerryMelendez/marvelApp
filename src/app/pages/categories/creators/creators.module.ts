@@ -8,6 +8,7 @@ import { CreatorsPageRoutingModule } from './creators-routing.module';
 
 import { CreatorsPage } from './creators.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { PipesModule } from '../../../pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
     IonicModule,
     CreatorsPageRoutingModule,
     ComponentsModule,
-    ComponentsModule
+    ComponentsModule,
+    PipesModule
   ],
   declarations: [CreatorsPage]
 })

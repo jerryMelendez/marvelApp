@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  // El boton de favoritos solo esta activo cuando se entra en la pagina de characters y comics
   async seeFavorites()
   {
     let component;

@@ -3,7 +3,9 @@
     <ion-grid class="ion-no-margin ion-no-padding">
       <ion-row class="ion-no-margin ion-no-padding">
         <ion-col size="12">
-          <img [src]="creator.thumbnail ? (creator.thumbnail.path + '.' + creator.thumbnail.extension) : creator.photoUrl" [alt]="creator.title" style="min-height: 220px; max-height: 220px; min-width: 100%;">
+          <img [src]="creator.thumbnail === null ? (creator.thumbnail.path + '.' + creator.thumbnail.extension).replace('http', 'https') : 'https://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg'"
+               [alt]="creator.title" 
+               style="min-height: 220px; max-height: 220px; min-width: 100%;">
         </ion-col>
       </ion-row>
       <ion-row class="ion-no-margin ion-no-padding">

@@ -11,7 +11,7 @@
     <ion-grid class="ion-no-margin ion-no-padding">
       <ion-row class="ion-no-margin ion-no-padding">
         <ion-col size="12">
-          <img [src]="character.thumbnail ? (character.thumbnail.path + '.' + character.thumbnail.extension) : character.photoUrl" [alt]="character.name" style="min-height: 220px; max-height: 220px;">
+          <img [src]="character.thumbnail ? (character.thumbnail.path + '.' + character.thumbnail.extension).replace('http', 'https') : character.photoUrl.replace('http', 'https')" [alt]="character.name" style="min-height: 220px; max-height: 220px;">
         </ion-col>
       </ion-row>
       <ion-row>

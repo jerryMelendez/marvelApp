@@ -17,6 +17,7 @@ export class StoriesPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.alertService.showLoading();
     this.getStories();
   }
 

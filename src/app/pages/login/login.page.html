@@ -13,31 +13,10 @@
         </ion-avatar>
       </ion-col>
     </ion-row>
-    <ion-row style="padding-top: 30px;">
-      <ion-col size="10" offset="1">
-        <ion-item>
-          <ion-input type="text" placeholder="user name" [(ngModel)]="userName"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
     <ion-row style="padding-top: 20px;">
       <ion-col size="10" offset="1">
-        <ion-item>
-          <ion-input [type]="type" placeholder="password" [(ngModel)]="password"></ion-input>
-          <!-- Boton para mostrar la contraseña -->
-          <ion-buttons slot="end" *ngIf="password !== '' && password !== null">
-            <ion-button (click)="changeInputType()">
-              <ion-icon slot="icon-only" *ngIf="type === 'password'" name="eye-outline"></ion-icon>
-              <ion-icon slot="icon-only" *ngIf="type === 'text'" name="eye-off-outline"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row style="padding-top: 20px;">
-      <ion-col size="10" offset="1">
-        <ion-button expand="block" color="header">
-          <ion-label color="white"><strong>Sign in</strong></ion-label>
+        <ion-button expand="block" color="header" (click)="loginAsGuest()">
+          <ion-label color="white"><strong>Sign in as guest</strong></ion-label>
         </ion-button>
       </ion-col>
     </ion-row>

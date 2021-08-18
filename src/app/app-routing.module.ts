@@ -19,10 +19,12 @@ const routes: Routes = [
     canLoad: [LoginGuard]  },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)  },
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    canLoad: [AuthGuard]  },
   {
     path: 'my-data',
-    loadChildren: () => import('./pages/my-data/my-data.module').then( m => m.MyDataPageModule)  },
+    loadChildren: () => import('./pages/my-data/my-data.module').then( m => m.MyDataPageModule),
+    canLoad: [AuthGuard]  },
   {
     path: 'characters',
     loadChildren: () => import('./pages/categories/characters/characters.module').then( m => m.CharactersPageModule),

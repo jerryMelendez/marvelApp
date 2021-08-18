@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@capacitor/storage';
-import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
 import { NavController } from '@ionic/angular';
-import { Filesystem, FilesystemDirectory } from '@capacitor/filesystem';
-import { Capacitor } from '@capacitor/core';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
 
 // const { Storage } = Plugins;
 @Injectable({
@@ -15,7 +14,8 @@ export class UserService {
 
   constructor(
     private afsAuth: AngularFireAuth,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private storage: AngularFireStorage
   ) { }
 
   async getIdentity()
@@ -164,57 +164,20 @@ export class UserService {
     }
   }
 
-  async uploadPhotos(file: any)
-  {
-    // const headers = new HttpHeaders().set('Authorization', token);
-    // const formData = new FormData();
-    // formData.append('file0', foto, foto.name);
-    // return this.http.post(`${url}user/upload`, formData, {headers});
-    const base64Data = await this.readAsBase64(file);
-
-    // Escribe el archivo a la carpeta Data
-    const fileName = '' + file.name + '.jpeg';
-    const savedFile = await Filesystem.writeFile({
-      path: fileName,
-      data: base64Data,
-      directory: FilesystemDirectory.Data
-    }).then( () => {
-
-      Filesystem.getUri({
-        directory: FilesystemDirectory.Data,
-        path: fileName
-      }).then( result => {
-        let path = Capacitor.convertFileSrc(result.uri);
-        console.log(path);
-      },
-      err => { console.log(err); });
-    });
-    console.log(savedFile);
-    
-    // Usa webPath para mostrar la nueva imagen en lugar de base64 desde la que 
-    // ya está cargada en memoria
-    return {
-      filepath: fileName,
-      // webviewPath: cameraPhoto.webPath
-    };
+   async uploadPhoto(image, identity) {
+    const filePath = `users/${identity.uid}-${image.name}`;
+    const fileRef = this.storage.ref(filePath);
+    console.log(filePath);
+    const task = this.storage.upload(filePath, image);
+    return task.snapshotChanges()
+      .pipe(
+        finalize(() =>{
+          fileRef.getDownloadURL().subscribe( urlImage => {
+            identity.fotourl = urlImage;
+          });
+        })
+      ).subscribe();
   }
-
-  private async readAsBase64(cameraPhoto) {
-    // Obtener la foto, leer como un blob, luego convertir a formato base64
-    const response = await fetch(cameraPhoto.webPath!);
-   const blob = await response.blob();
-  
-    return await this.convertBlobToBase64(blob) as string;  
-  }
-  
-  convertBlobToBase64 = (blob: Blob) => new Promise((resolve, reject) => {
-    const reader = new FileReader;
-    reader.onerror = reject;
-    reader.onload = () => {
-        resolve(reader.result);
-    };
-    reader.readAsDataURL(blob);
-  });
 
   async logOut(): Promise<any>
   {

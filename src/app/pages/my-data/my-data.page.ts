@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Platform } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 declare var window: any;
 @Component({
@@ -16,27 +17,30 @@ export class MyDataPage implements OnInit {
   public width = (window.innerWidth) * 0.5;
   public photoUrl: string = '';
   public identity: any = {};
-  public image: any;
+  public image: SafeResourceUrl;
+  public lat: number;
+  public lng: number;
+  ;
   selectedFile = null;
   constructor(
     private userService: UserService,
     private alertService: AlertService,
-    private platform: Platform,
+    public platform: Platform,
     private geoLocation: Geolocation,
-    private camera: Camera
-  ) { this.getIdentity(); }
+    private camera: Camera,
+    private sanitizer: DomSanitizer,
+  ) { this.getIdentity(); 
+    this.getLocation();}
 
   ngOnInit() {
   }
 
-  async getLocation() { // El getLocation obtendra las coordenadas y actualizará el usuario
+  // El getLocation obtendra las coordenadas y las enviará al componente de mapa
+  async getLocation() {
     this.geoLocation.getCurrentPosition().then(async (resp) => {
 
-      this.identity.lat = resp.coords.latitude;
-      this.identity.long = resp.coords.longitude;
-      this.userService.updateIdentity(this.identity); // El update identity es el servicio para actualizar el storage
-
-      this.identity = await this.userService.getIdentity();
+      this.lat = resp.coords.latitude;
+      this.lng = resp.coords.longitude;
      }).catch((error) => {
        console.log('Error getting location', error);
      });
@@ -46,34 +50,6 @@ export class MyDataPage implements OnInit {
   {
     this.identity = await this.userService.getIdentity();
     this.photoUrl = this.identity.foto !== '' ? this.identity.foto : this.identity.fotourl;
-    if (!this.identity.lat && !this.identity.long)
-    {
-      this.getLocation();
-    }
-  }
-
-  subirFoto( event: any ): void
-  {
-    this.selectedFile = event.target.files[0];
-    console.log(this.selectedFile);
-    this.userService.uploadPhotos(this.selectedFile);
-    // this.alertService.showLoading('Subiendo . . .');
-    // this.userService.subirImagen(this.selectedFile).subscribe(
-    //   response => {
-    //     if (response.image)
-    //     {
-    //       this.alertService.stopLoading(true);
-    //       this.usuario.foto = response.image;
-    //       this.alertService.alertaInformativa('Imagen añadida correctamente');
-    //     } else {
-    //       this.alertService.stopLoading(true);
-    //       this.alertService.alertaInformativa(response.message);
-    //     }
-    //   }, error => {
-    //     this.alertService.stopLoading(true);
-    //     this.alertService.alertaInformativa('Error: formato de imagen no soportado');
-    //   }
-    // );
   }
 
   tomarFoto()
@@ -82,32 +58,19 @@ export class MyDataPage implements OnInit {
       quality: 100,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true,
-      sourceType: this.camera.PictureSourceType.CAMERA
+      mediaType: this.camera.MediaType.PICTURE
     }
     
-    this.camera.getPicture(options).then((imageData) => {
+    // Captura la foto de la camara
+    this.camera.getPicture(options).then(async (imageData) => {
      // imageData is either a base64 encoded string or a file URI
      // If it's base64 (DATA_URL):
-     
-      const img = window.Ionic.WebView.convertFileSrc(imageData);
-      console.log(img)
-      this.image = img;
+    //  this.image = 'data:image/jpeg;base64,' + imageData;
+     this.image = this.sanitizer.bypassSecurityTrustResourceUrl(imageData && (imageData.webPath));
+     await this.userService.uploadPhoto(this.image, this.identity);
+     console.log(this.identity);
     }, (err) => {
      // Handle error
     });
-  }
-
-  openMapsApp(latitude, longitude) {
-    // if (this.platform.is('android'))
-    // {
-    //   window.location.href = `https://www.google.com/maps/@${latitude},${longitude}`
-    // }
-    // else
-    // {
-    //   window.open(`https://www.google.com/maps/@${latitude},${longitude}`);
-    // }
-    
   }
 }

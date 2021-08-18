@@ -17,6 +17,7 @@ export class SeriesPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.alertService.showLoading();
     this.getSeries();
   }
 

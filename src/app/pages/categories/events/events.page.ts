@@ -17,6 +17,7 @@ export class EventsPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.alertService.showLoading();
     this.getEvents();
   }
 
