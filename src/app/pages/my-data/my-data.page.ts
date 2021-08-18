@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
-import { Geolocation } from '@capacitor/geolocation';
 import { Platform } from '@ionic/angular';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 
 @Component({
@@ -20,31 +20,34 @@ export class MyDataPage implements OnInit {
   constructor(
     private userService: UserService,
     private alertService: AlertService,
-    private platform: Platform
+    private platform: Platform,
+    private geoLocation: Geolocation
   ) { this.getIdentity(); }
 
   ngOnInit() {
   }
 
-  async getLocation() {
-    // const position = await Geolocation.getCurrentPosition();
-    // setTimeout(() => {
-    //   this.openMapsApp(position.coords.latitude, position.coords.longitude);
-    // }, 500);
-    const printCurrentPosition = async () => {
-      const coordinates = await Geolocation.getCurrentPosition();
-    
-      console.log('Current position:', coordinates);
-    };
-    console.log(await Geolocation.checkPermissions());
-    // const coordinates = await Geolocation.getCurrentPosition();
-    // console.log(coordinates);
+  async getLocation() { // El getLocation obtendra las coordenadas y actualizará el usuario
+    this.geoLocation.getCurrentPosition().then(async (resp) => {
+
+      this.identity.lat = resp.coords.latitude;
+      this.identity.long = resp.coords.longitude;
+      this.userService.updateIdentity(this.identity); // El update identity es el servicio para actualizar el storage
+
+      this.identity = await this.userService.getIdentity();
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
   }
 
   async getIdentity()
   {
     this.identity = await this.userService.getIdentity();
     this.photoUrl = this.identity.foto !== '' ? this.identity.foto : this.identity.fotourl;
+    if (!this.identity.lat && !this.identity.long)
+    {
+      this.getLocation();
+    }
   }
 
   subirFoto( event: any ): void
@@ -72,14 +75,14 @@ export class MyDataPage implements OnInit {
   }
 
   openMapsApp(latitude, longitude) {
-    if (this.platform.is('android'))
-    {
-      window.location.href = `https://www.google.com/maps/@${latitude},${longitude}`
-    }
-    else
-    {
-      window.open(`https://www.google.com/maps/@${latitude},${longitude}`);
-    }
+    // if (this.platform.is('android'))
+    // {
+    //   window.location.href = `https://www.google.com/maps/@${latitude},${longitude}`
+    // }
+    // else
+    // {
+    //   window.open(`https://www.google.com/maps/@${latitude},${longitude}`);
+    // }
     
   }
 }

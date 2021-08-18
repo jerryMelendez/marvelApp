@@ -12,6 +12,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { PipesModule } from './pipes/pipes.module';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,9 @@ import { PipesModule } from './pipes/pipes.module';
     AngularFireAuthModule,
     PipesModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [ Geolocation,
+              { provide: RouteReuseStrategy, 
+                useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

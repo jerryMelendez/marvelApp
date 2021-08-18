@@ -71,6 +71,26 @@ export class UserService {
     Storage.set({key: 'my_uid', value: JSON.stringify(user.uid)});
   }
 
+  updateIdentity(user): Promise<any>
+  {
+    const key = 'users';
+    return Storage.get({ key }).then((items) => {
+      let data: any[] = JSON.parse(items.value);
+      if ( data )
+      {
+        const index = data.findIndex(e => e.uid === user.uid); // Buscar el indice cuyos uid coincidan
+
+        if (index > -1) // Si se encontró un indice reemplazar el registro por el objeto nuevo
+        {
+          data[index] = user;
+        }
+        
+        // Cargamos el array devuelta al local storage
+        Storage.set({ key, value: JSON.stringify(data) });
+      }
+    });
+  }
+
   loginGoogleUser() {
     return this.afsAuth.signInWithPopup(new firebase.default.auth.GoogleAuthProvider())
             .then(credential => this.updateUserData(credential.user) );
@@ -91,10 +111,6 @@ export class UserService {
     usuario.foto = '';
     usuario.nick = nombres[0] + '' + nombres[1].substring(0, 1) + Math.round(Math.random() * 1001);
     usuario.uid = user.uid;
-  
-    // for (let i = 1; i < nombres.length; i++) {
-    //   usuario.apellidos = ' ' + usuario.apellidos + nombres[i];
-    // }
   
     if (user.providerData[0].providerId === 'google.com')
     {

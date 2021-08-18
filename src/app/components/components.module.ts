@@ -16,6 +16,7 @@ import { PanelCreatorsComponent } from './panel-creators/panel-creators.componen
 import { PanelEventsComponent } from './panel-events/panel-events.component';
 import { PanelSeriesComponent } from './panel-series/panel-series.component';
 import { PanelStoriesComponent } from './panel-stories/panel-stories.component';
+import { MapComponent } from "./map/map.component";
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import { PanelStoriesComponent } from './panel-stories/panel-stories.component';
         ModalDetailComicComponent,
         ModalFavoriteCharactersComponent,
         ModalFavoriteComicsComponent,
+        MapComponent
     ],
     exports: [
         MenuComponent,
@@ -50,7 +52,8 @@ import { PanelStoriesComponent } from './panel-stories/panel-stories.component';
         PanelComicComponent,
         ModalDetailComicComponent,
         ModalFavoriteCharactersComponent,
-        ModalFavoriteComicsComponent
+        ModalFavoriteComicsComponent,
+        MapComponent
     ],
     imports: [
         CommonModule,
