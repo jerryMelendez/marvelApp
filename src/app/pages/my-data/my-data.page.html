@@ -5,11 +5,11 @@
     <ion-row>
       <ion-col size="6" offset="3">
         <ion-avatar [style]="'width: '+width+'px; height: '+width+'px;'">
-          <img [src]="photoUrl" alt="user">
+          <img [src]="image" alt="user">
           <ion-buttons>
-            <ion-button (change)="subirFoto( $event )" style="position: absolute; bottom: 0px; right: 0px;" shape="round" fill="solid" color="primary">
+            <ion-button (click)="tomarFoto()" style="position: absolute; bottom: 0px; right: 0px;" shape="round" fill="solid" color="primary">
               <ion-icon name="camera-outline" slot="icon-only"></ion-icon>
-              <input type="file" id="btn_file" accept="image/*" name="foto">
+              <!-- <input type="file" id="btn_file" accept="image/*" name="foto"> -->
             </ion-button>
           </ion-buttons>
         </ion-avatar>

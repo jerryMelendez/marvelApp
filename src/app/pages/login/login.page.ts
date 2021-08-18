@@ -39,6 +39,9 @@ export class LoginPage implements OnInit {
       // Guarda los datos del usuario en el local storage
       this.userService.setIdentity(user);
       this.navCtrl.navigateForward('/home');
+      setTimeout(() => {
+        location.reload();
+      }, 500);
     }).catch((err) => {
 
     });
@@ -48,7 +51,11 @@ export class LoginPage implements OnInit {
   {
     this.userService.loginFacebookUser()
     .then((user: any) => {
-      console.log(user);
+      this.userService.setIdentity(user);
+      this.navCtrl.navigateForward('/home');
+      setTimeout(() => {
+        location.reload();
+      }, 500);
     }).catch((err) => {
 
     })

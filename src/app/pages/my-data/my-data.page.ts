@@ -3,8 +3,9 @@ import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
 import { Platform } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
-
+declare var window: any;
 @Component({
   selector: 'app-my-data',
   templateUrl: './my-data.page.html',
@@ -15,13 +16,14 @@ export class MyDataPage implements OnInit {
   public width = (window.innerWidth) * 0.5;
   public photoUrl: string = '';
   public identity: any = {};
-
+  public image: any;
   selectedFile = null;
   constructor(
     private userService: UserService,
     private alertService: AlertService,
     private platform: Platform,
-    private geoLocation: Geolocation
+    private geoLocation: Geolocation,
+    private camera: Camera
   ) { this.getIdentity(); }
 
   ngOnInit() {
@@ -72,6 +74,29 @@ export class MyDataPage implements OnInit {
     //     this.alertService.alertaInformativa('Error: formato de imagen no soportado');
     //   }
     // );
+  }
+
+  tomarFoto()
+  {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType: this.camera.PictureSourceType.CAMERA
+    }
+    
+    this.camera.getPicture(options).then((imageData) => {
+     // imageData is either a base64 encoded string or a file URI
+     // If it's base64 (DATA_URL):
+     
+      const img = window.Ionic.WebView.convertFileSrc(imageData);
+      console.log(img)
+      this.image = img;
+    }, (err) => {
+     // Handle error
+    });
   }
 
   openMapsApp(latitude, longitude) {
