@@ -52,6 +52,7 @@ export class PanelCharacterComponent implements OnInit {
     }
   }
 
+  // Remover de favoritos
   async removeFavorite()
   {
     const band = await this.characterService.RemoveFavorite(this.character.id, this.identity.uid);
@@ -65,6 +66,7 @@ export class PanelCharacterComponent implements OnInit {
     this.typeChanged.emit('Removed');
   }
 
+  // Ver en un modal el detalle del personaje
   async seeDetail() {
     const modal = await this.modalCtrl.create({
       component: ModalDetailCharacterComponent,

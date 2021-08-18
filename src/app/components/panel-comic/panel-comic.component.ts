@@ -52,6 +52,7 @@ export class PanelComicComponent implements OnInit {
     }
   }
 
+  // Remover de favoritos
   async removeFavorite()
   {
     const band = await this.comicService.RemoveFavorite(this.comic.id, this.identity.uid);
@@ -65,6 +66,7 @@ export class PanelComicComponent implements OnInit {
     this.typeChanged.emit('Removed');
   }
 
+  // Ver en un modal el detalle del comic
   async seeDetail() {
     const modal = await this.modalCtrl.create({
       component: ModalDetailComicComponent,

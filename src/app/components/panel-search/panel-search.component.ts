@@ -13,6 +13,8 @@ export class PanelSearchComponent implements OnInit {
 
   ngOnInit() {}
 
+  // Output que emitirá al componente padre un evento cuando se haga la busqueda
+  // Y devolverá el texto ingresado
   onSearchChange(event)
   {
     this.typeChanged.emit(event.detail.value);

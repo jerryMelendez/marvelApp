@@ -42,7 +42,6 @@ export class MyDataPage implements OnInit {
       this.lat = resp.coords.latitude;
       this.lng = resp.coords.longitude;
      }).catch((error) => {
-       console.log('Error getting location', error);
      });
   }
 
@@ -68,7 +67,6 @@ export class MyDataPage implements OnInit {
     //  this.image = 'data:image/jpeg;base64,' + imageData;
      this.image = this.sanitizer.bypassSecurityTrustResourceUrl(imageData && (imageData.webPath));
      await this.userService.uploadPhoto(this.image, this.identity);
-     console.log(this.identity);
     }, (err) => {
      // Handle error
     });

@@ -29,7 +29,6 @@ export class EventsPage implements OnInit {
         {
           this.alertService.stopLoading();
           this.arrayEvents = response.data.results;
-          console.log(this.arrayEvents);
         }
       }
     );

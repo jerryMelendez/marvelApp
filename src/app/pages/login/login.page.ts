@@ -26,7 +26,6 @@ export class LoginPage implements OnInit {
   // Evento al pulsar el ojo para ver la contraseña
   changeInputType()
   {
-    console.log('chagetype');
     this.type = this.type === 'password' ? 'text' : 'password';
   }
 

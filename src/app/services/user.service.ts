@@ -102,7 +102,6 @@ export class UserService {
   }
 
   async updateUserData(user, band?: boolean) {
-    console.log(user);
     const nombres = user.displayName.split(' ');
     const usuario: any = {};
     usuario.displayName = user.displayName;
@@ -167,7 +166,6 @@ export class UserService {
    async uploadPhoto(image, identity) {
     const filePath = `users/${identity.uid}-${image.name}`;
     const fileRef = this.storage.ref(filePath);
-    console.log(filePath);
     const task = this.storage.upload(filePath, image);
     return task.snapshotChanges()
       .pipe(

@@ -30,7 +30,6 @@ export class CreatorsService {
     }
     else
     {
-      console.log(name);
       if (limit === null && offset === null)
       {
         return this.http.get(`https://gateway.marvel.com:443/v1/public/creators?nameStartsWith=${name}&apikey=${this.apikey}`);

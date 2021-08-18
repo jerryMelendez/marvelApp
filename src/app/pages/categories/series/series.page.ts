@@ -29,7 +29,6 @@ export class SeriesPage implements OnInit {
         {
           this.alertService.stopLoading();
           this.arraySeries = response.data.results;
-          console.log(this.arraySeries);
         }
       }
     );

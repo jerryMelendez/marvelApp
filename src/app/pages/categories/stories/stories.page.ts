@@ -29,7 +29,6 @@ export class StoriesPage implements OnInit {
         {
           this.alertService.stopLoading();
           this.arrayStories = response.data.results;
-          console.log(this.arrayStories);
         }
       }
     );
